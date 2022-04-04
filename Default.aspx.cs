@@ -16,7 +16,8 @@ namespace WebApplicationEjemplo1
         {
             LeerAlumnos();
 
-            DropDownList1.DataValueField = "nombre";
+            DropDownList1.DataTextField = "nombre";
+            DropDownList1.DataValueField = "carne";
             DropDownList1.DataSource = alumnos;
             DropDownList1.DataBind();
         }
@@ -46,10 +47,15 @@ namespace WebApplicationEjemplo1
         private void GuardarInscripciones(string fileName, string texto)
         {
             string fileName1  = Server.MapPath("~/Archivos/Inscripciones.txt");
-
-            FileStream stream = new FileStream(fileName1, FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream stream = new FileStream(fileName, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(stream);
-            writer.WriteLine(texto);
+            foreach (var inscripcion in inscripciones)
+            {
+                writer.WriteLine(inscripcion.carne);
+                writer.WriteLine(inscripcion.grado);
+                writer.WriteLine(inscripcion.fecha);
+            }
+            
             writer.Close();
         }
 
@@ -62,6 +68,8 @@ namespace WebApplicationEjemplo1
             inscripcion.fecha = DateTime.Now;
 
             inscripciones.Add(inscripcion);
+
+            GuardarInscripciones();
         }
     }
 }
