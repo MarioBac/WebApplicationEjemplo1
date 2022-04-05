@@ -15,7 +15,7 @@ namespace WebApplicationEjemplo1
         List<Inscripciones> inscripciones = new List<Inscripciones>();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
         private void LeerAlumnos()
         {

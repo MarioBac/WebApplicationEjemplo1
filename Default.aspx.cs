@@ -11,15 +11,20 @@ namespace WebApplicationEjemplo1
     public partial class _Default : Page
     {
         List<Alumno> alumnos = new List<Alumno>();
-        List<Inscripciones> inscripciones = new List<Inscripciones>();
+        static List<Inscripciones> inscripciones = new List<Inscripciones>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            LeerAlumnos();
+            if (!IsPostBack)
+            {
 
-            DropDownList1.DataTextField = "nombre";
-            DropDownList1.DataValueField = "carne";
-            DropDownList1.DataSource = alumnos;
-            DropDownList1.DataBind();
+
+                LeerAlumnos();
+
+                DropDownList1.DataTextField = "nombre";
+                DropDownList1.DataValueField = "carne";
+                DropDownList1.DataSource = alumnos;
+                DropDownList1.DataBind();
+            }
         }
         
         private void LeerAlumnos()
